@@ -370,5 +370,57 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "address": "Rua São Paulo",
+      "number": "115",
+      "optionalAddress": "Caius Burguer",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup-cake"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "address": "Rua Vila Sei la",
+      "number": "132",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup-cake"
+        },
+        {
+          "quantity": 1,
+          "menuId": "bread"
+        },
+        {
+          "quantity": 1,
+          "menuId": "donut"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "address": "Rua Poly Birl",
+      "number": "546",
+      "optionalAddress": "",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "capp"
+        },
+        {
+          "quantity": 2,
+          "menuId": "espreso"
+        }
+      ],
+      "id": 3
+    }
+  ]
 }
