@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Restaurant} from './restaurant/restaurant.model';
 import {RestaurantsService} from './restaurants.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'mt-restaurants',
@@ -24,11 +25,21 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class RestaurantsComponent implements OnInit {
   restaurants: Restaurant[];
   searchBarState = 'hidden';
+  searchForm: FormGroup;
+  searchControl: FormControl;
 
-  constructor(private restaurantsService: RestaurantsService) { }
+  constructor(private restaurantsService: RestaurantsService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.restaurantsService.restaurants().subscribe(restaurants => this.restaurants = restaurants);
+    this.searchControl = this.fb.control('');
+    this.searchForm = this.fb.group({
+      searchControl: this.searchControl
+    });
+
+    this.searchControl.valueChanges.switchMap(searchTerm => this.restaurantsService.restaurants(searchTerm))
+      .subscribe(restaurants => this.restaurants = restaurants);
   }
 
   toggleSearch() {
