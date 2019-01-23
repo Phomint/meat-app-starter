@@ -13,6 +13,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 export class OrderComponent implements OnInit {
   orderForm: FormGroup;
   delivery = 8;
+  orderId: string;
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   numberPattern = /^[0-9]*$/;
@@ -69,10 +70,18 @@ export class OrderComponent implements OnInit {
     this.orderService.remove(item);
   }
 
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined;
+  }
+
   checkOrder(order: Order) {
     order.orderItems = this.cartItems()
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id));
-    this.orderService.checkOrder(order).subscribe((orderId: string) => {
+    this.orderService.checkOrder(order)
+      .do((orderId: string) => {
+        this.orderId = orderId
+      })
+      .subscribe((orderId: string) => {
       this.router.navigate(['/order-summary']);
       this.orderService.clear();
     });
