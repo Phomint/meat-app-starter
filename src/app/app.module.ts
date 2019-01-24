@@ -18,9 +18,14 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
+
+
 import {SharedModule} from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
+import locatePt from '@angular/common/locales/pt';
+
+registerLocaleData(locatePt, 'pt');
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
 import {ApplicationErrorHandler} from './app.error-handler';
@@ -51,7 +56,7 @@ import {ApplicationErrorHandler} from './app.error-handler';
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-              {provide: LOCALE_ID, useValue: 'pt-BR'},
+              {provide: LOCALE_ID, useValue: 'pt'},
               {provide: ErrorHandler, useClass: ApplicationErrorHandler}],
   bootstrap: [AppComponent]
 })
